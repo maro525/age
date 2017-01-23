@@ -8,21 +8,21 @@ import tensorflow as tf
 関数
 '''
 
-
+# 画像を行列にする関数
 def img_to_matrix(filename, verbose=False):
     img = cv2.imread(filename)
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-    img = cv2.resize(img, (28, 28))
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY) # グレースケール変換
+    img = cv2.resize(img, (28, 28)) # 28×28サイズに整える
     img_array = np.array(img)
     return img_array
 
-
+# 配列データを一列のデータにする関数
 def flatten_matrix(img):
     s = img.shape[0] * img.shape[1]
     img_wide = img.reshape(1, s)
     return img_wide
 
-
+# ニューラルネットワークの関数(tensorflow)
 def tensorflow(train_x, train_y, test_x, test_y):
     # 学習したいモデルを記述
     # 入力変数と出力変数のプレースホルダを生成
@@ -53,7 +53,7 @@ def tensorflow(train_x, train_y, test_x, test_y):
     init = tf.global_variables_initializer()
     sess.run(init)
     # バッチ型確率的勾配降下法でパラメータ更新
-    for i in range(5000):
+    for i in range(7000):
         batch_xs = train_x
         batch_ys = train_y
         # 学習
